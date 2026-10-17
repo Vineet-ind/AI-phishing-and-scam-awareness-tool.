@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Check suspicious messages for common phishing and scam warning signs.">
+  <title>ScamSense — Message safety checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="ScamSense home"><span class="brand-icon">S</span> ScamSense<span class="brand-dot">.</span></a>
+    <span class="privacy"><span class="dot"></span> Private by design</span>
+  </header>
+  <main>
+    <section class="intro">
+      <div class="eyebrow"><span>✳</span> YOUR EVERYDAY SCAM CHECK</div>
+      <h1>Pause. Check.<br><span>Stay one step ahead.</span></h1>
+      <p>Paste a suspicious text, email, or direct message. See common warning signs and what to do next.</p>
+    </section>
+    <section class="checker card" aria-labelledby="checker-title">
+      <div class="card-heading">
+        <div><span class="step">01</span><h2 id="checker-title">Check a message</h2></div>
+        <span class="local-tag">Runs locally</span>
+      </div>
+      <label for="message">MESSAGE TEXT</label>
+      <textarea id="message" maxlength="10000" placeholder="Paste the message here — remove personal details first." spellcheck="false"></textarea>
+      <div class="form-meta"><span id="char-count">0 / 10,000</span><span>We don't save or share your message.</span></div>
+      <div class="examples">
+        <span>Try an example:</span>
+        <button type="button" class="example" data-example="URGENT: Your bank account is suspended. Verify your password now at http://bit.ly/account-check">Bank alert</button>
+        <button type="button" class="example" data-example="Congratulations! You won a prize. Pay a small delivery fee with a gift card to claim it today.">Prize scam</button>
+        <button type="button" class="example" data-example="Hi, the team meeting is at 2 PM in room 4. See you there!">Normal message</button>
+      </div>
+      <div class="actions">
+        <button type="button" id="clear" class="button button-secondary">Clear</button>
+        <button type="submit" id="analyze" class="button button-primary"><span>✳</span> Analyze message</button>
+      </div>
+      <p class="disclaimer">AI-inspired pattern checker · Not a definitive verdict. Never paste passwords, verification codes, or other sensitive information.</p>
+    </section>
+
+    <section id="result" class="result card" aria-live="polite" hidden>
+      <div class="card-heading">
+        <div><span class="step">02</span><h2>Safety check</h2></div>
+        <button id="dismiss" class="dismiss" type="button" aria-label="Dismiss result">×</button>
+      </div>
+      <div class="result-summary">
+        <div id="score-ring" class="score-ring"><span id="score">0</span><small>RISK</small></div>
+        <div><span id="risk-label" class="risk-label"></span><p id="advice"></p></div>
+      </div>
+      <h3 id="findings-title">Signals to notice</h3>
+      <div id="findings" class="findings"></div>
+      <div class="safe-tip"><span>✓</span><p><strong>Remember:</strong> Don't use contact details or links in a suspicious message. Find the organization's official website or app yourself.</p></div>
+    </section>
+    <footer><span>ScamSense <span class="brand-dot">.</span></span><span>Educational tool · Messages stay in your browser session</span></footer>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
